@@ -52,7 +52,7 @@ while (winOrlose == "undetermined"){
          }
       } else if (answer == quizData[questionSheet].answer) {
          winOrlose = "win"
-         return endGame()
+         endGame()
       }
    }
 }
