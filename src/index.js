@@ -45,9 +45,8 @@ let quizData =[
 ]
 
 function startGame(){
-   if(winCount > 0){
       winOrlose = "undetermined";
-   }
+      questionNum = 0;
       let quizQuestions = Math.floor(Math.random() * 3);
       let userAnswer = askForAnswer(questionNum, quizQuestions)
       checkAnswer(userAnswer, quizQuestions)
@@ -55,6 +54,9 @@ function startGame(){
 
 function askForAnswer(questionNum, questionSet){
    let userAnswer = prompt(Object.values(quizData[questionSet])[questionNum])
+   if(userAnswer == null){
+      userAnswer = "blank"
+   }
    checkAnswer(userAnswer.toLowerCase(), questionSet)
 }
 
@@ -63,7 +65,6 @@ function checkAnswer(answer, questionSheet) {
 while (winOrlose == "undetermined"){
       if(answer != quizData[questionSheet].answer) {
          if(numOfTries == 0){
-            debugger
             winOrlose = "lose"
             endGame()
          } else {
