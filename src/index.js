@@ -6,9 +6,11 @@ let winCount = 0;
 let questionNum = 0;
 //Start the game when the user presses "Let's Start"
 letsStartBtn.onclick = function() {
-   window.alert("Get ready!")
    letsStartBtn.style.visibility = "hidden"
-   startGame()
+   setTimeout(() => {
+      window.alert("Get ready!");
+      startGame()
+    }, "500")
  };
 
 let quizData =[
@@ -37,7 +39,7 @@ function askForAnswer(questionNum, questionSet){
 
 function checkAnswer(answer, questionSheet) {
   
-gamePlaying: while (winOrlose == "undetermined"){
+while (winOrlose == "undetermined"){
       if(answer != quizData[questionSheet].answer) {
          if(numOfTries == 0){
             debugger
@@ -61,10 +63,11 @@ function endGame(){
       winCount += 1;
       document.getElementById("winLossCount").innerHTML = `Your Wins: ${winCount}`
       winOrlose = "end";
+      letsStartBtn.style.visibility = "visible";
    } else if (winOrlose == "lose"){
       window.alert("You lost.....")
       winOrlose = "end";
-      letsStartBtn.style.visibility = visible;
+      letsStartBtn.style.visibility = "visible";
    }
 }
   
