@@ -48,7 +48,7 @@ function startGame(){
    if(winCount > 0){
       winOrlose = "undetermined";
    }
-      let quizQuestions = Math.floor(Math.random() * 4);
+      let quizQuestions = Math.floor(Math.random() * 3);
       let userAnswer = askForAnswer(questionNum, quizQuestions)
       checkAnswer(userAnswer, quizQuestions)
 }
