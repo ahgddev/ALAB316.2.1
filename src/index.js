@@ -34,6 +34,13 @@ let quizData =[
       q3: "This pokemon is Fairy Type",
       q4: "This pokemon has 7 Pokemon related to it",
       answer: "sylveon"
+   },
+   {
+      q1: "This pokemon does not Evolve further",
+      q2: "This pokemon is Slimy",
+      q3: "This pokemon can use Dragon type moves",
+      q4: "This pokemon is Purple",
+      answer: "goodra"
    }
 ]
 
@@ -41,7 +48,7 @@ function startGame(){
    if(winCount > 0){
       winOrlose = "undetermined";
    }
-      let quizQuestions = 0;
+      let quizQuestions = Math.floor(Math.random() * 4);
       let userAnswer = askForAnswer(questionNum, quizQuestions)
       checkAnswer(userAnswer, quizQuestions)
 }
@@ -77,10 +84,12 @@ function endGame(){
       winCount += 1;
       document.getElementById("winLossCount").innerHTML = `Your Wins: ${winCount}`
       winOrlose = "end";
+      numOfTries = 3;
       letsStartBtn.style.visibility = "visible";
    } else if (winOrlose == "lose"){
       window.alert("You lost.....")
       winOrlose = "end";
+      numOfTries = 3;
       letsStartBtn.style.visibility = "visible";
    }
 }
