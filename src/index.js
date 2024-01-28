@@ -1,8 +1,9 @@
 let letsStartBtn = document.getElementById("guess_button");
 let gameStarted = window.gameStarted;
-let numOfTries = 4;
-let winOrlose = "undetermined"
+let numOfTries = 3;
+let winOrlose = "undetermined";
 let winCount = 0;
+let questionNum = 0;
 //Start the game when the user presses "Let's Start"
 letsStartBtn.onclick = function() {
    window.alert("Get ready!")
@@ -21,31 +22,36 @@ let quizData =[
 ]
 
 function startGame(){
-   let quizQuestions = 0;
-   let questionNum = "q1"
-   let userAnswer = askForAnswer(questionNum, quizQuestions)
-   checkAnswer(userAnswer, quizQuestions)
+      let quizQuestions = 0;
+      let userAnswer = askForAnswer(questionNum, quizQuestions)
+      checkAnswer(userAnswer, quizQuestions)
 }
 
 function askForAnswer(questionNum, questionSet){
-   return promptResponse = prompt(quizData[questionSet].index)
+   let userAnswer = prompt(Object.values(quizData[questionSet])[questionNum])
+   return checkAnswer(userAnswer, questionSet)
 }
 
 function checkAnswer(answer, questionSheet) {
    while (winOrlose == "undetermined"){
       if(answer != quizData[questionSheet].answer) {
+         if(numOfTries == 0){
+            debugger
+            winOrlose = "lose"
+            endGame()
+            break
+         }
          numOfTries -= 1;
-         return askForAnswer("q2", questionSheet)
+         questionNum += 1;
+         return askForAnswer(questionNum, questionSheet)
       } else if (answer == quizData[questionSheet].answer) {
          winOrlose = "win"
-         endGame()
-         break
+         return endGame()
       }
    }
 }
 
 function endGame(){
-   debugger
    if(winOrlose == "win"){
       window.alert("You won!")
       winCount += 1;
