@@ -20,6 +20,20 @@ let quizData =[
       q3: "This pokemon is Electric type",
       q4: "This pokemon is on the cover of Pokemon Yellow Version",
       answer: "pikachu"
+   },
+   {
+      q1: "This pokemon is from Kanto.",
+      q2: "This pokemon is Red",
+      q3: "This pokemon can Fly",
+      q4: "This pokemon is on the cover of Pokemon Red Version",
+      answer: "charizard"
+   },
+   {
+      q1: "This pokemon is Pink",
+      q2: "This pokemon is very popular",
+      q3: "This pokemon is Fairy Type",
+      q4: "This pokemon has 7 Pokemon related to it",
+      answer: "sylveon"
    }
 ]
 
@@ -34,7 +48,7 @@ function startGame(){
 
 function askForAnswer(questionNum, questionSet){
    let userAnswer = prompt(Object.values(quizData[questionSet])[questionNum])
-   checkAnswer(userAnswer, questionSet)
+   checkAnswer(userAnswer.toLowerCase(), questionSet)
 }
 
 function checkAnswer(answer, questionSheet) {
