@@ -22,22 +22,30 @@ let quizData =[
 
 function startGame(){
    let quizQuestions = 0;
-   let promptResponse = prompt(quizData[quizQuestions].q1)
-   checkAnswer(promptResponse, quizQuestions)
+   let questionNum = "q1"
+   let userAnswer = askForAnswer(questionNum, quizQuestions)
+   checkAnswer(userAnswer, quizQuestions)
+}
+
+function askForAnswer(questionNum, questionSet){
+   return promptResponse = prompt(quizData[questionSet].index)
 }
 
 function checkAnswer(answer, questionSheet) {
-   if(answer != quizData[questionSheet].answer) {
-      numOfTries -= 1;
-      return promptResponse = prompt(quizData[questionSheet].q2)
-   } else if (answer == quizData[questionSheet].answer) {
-      debugger
-      winOrlose = "win"
-      endGame()
+   while (winOrlose == "undetermined"){
+      if(answer != quizData[questionSheet].answer) {
+         numOfTries -= 1;
+         return askForAnswer("q2", questionSheet)
+      } else if (answer == quizData[questionSheet].answer) {
+         winOrlose = "win"
+         endGame()
+         break
+      }
    }
 }
 
 function endGame(){
+   debugger
    if(winOrlose == "win"){
       window.alert("You won!")
       winCount += 1;
