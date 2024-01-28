@@ -22,6 +22,9 @@ let quizData =[
 ]
 
 function startGame(){
+   if(winCount > 0){
+      winOrlose = "undetermined";
+   }
       let quizQuestions = 0;
       let userAnswer = askForAnswer(questionNum, quizQuestions)
       checkAnswer(userAnswer, quizQuestions)
@@ -29,21 +32,22 @@ function startGame(){
 
 function askForAnswer(questionNum, questionSet){
    let userAnswer = prompt(Object.values(quizData[questionSet])[questionNum])
-   return checkAnswer(userAnswer, questionSet)
+   checkAnswer(userAnswer, questionSet)
 }
 
 function checkAnswer(answer, questionSheet) {
-   while (winOrlose == "undetermined"){
+  
+gamePlaying: while (winOrlose == "undetermined"){
       if(answer != quizData[questionSheet].answer) {
          if(numOfTries == 0){
             debugger
             winOrlose = "lose"
             endGame()
-            break
+         } else {
+            numOfTries -= 1;
+            questionNum += 1;
+            return askForAnswer(questionNum, questionSheet)
          }
-         numOfTries -= 1;
-         questionNum += 1;
-         return askForAnswer(questionNum, questionSheet)
       } else if (answer == quizData[questionSheet].answer) {
          winOrlose = "win"
          return endGame()
@@ -56,10 +60,11 @@ function endGame(){
       window.alert("You won!")
       winCount += 1;
       document.getElementById("winLossCount").innerHTML = `Your Wins: ${winCount}`
-      winOrlose = "undetermined";
+      winOrlose = "end";
    } else if (winOrlose == "lose"){
       window.alert("You lost.....")
-      winOrlose = "undetermined";
+      winOrlose = "end";
+      letsStartBtn.style.visibility = visible;
    }
 }
   
